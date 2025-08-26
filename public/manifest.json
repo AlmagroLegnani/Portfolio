@@ -1,0 +1,21 @@
+{
+  "name": "Almagro Dev Portfolio",
+  "short_name": "AlmagroDev",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fff",
+  "theme_color": "#0f172a",
+  "description": "Portfolio de Almagro Legnani - Desarrollador Full Stack, proyectos, contacto y tecnologías web modernas.",
+  "icons": [
+    {
+      "src": "/img/Logo_Official.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/Logo_Official.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
