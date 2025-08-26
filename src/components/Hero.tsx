@@ -46,7 +46,7 @@ const Hero = () => {
         <div className="max-w-5xl mx-auto relative z-10 px-2">
           {/* Botones flotantes: horizontal en móvil (solo iconos sobrios), columna en desktop (icono + texto) */}
           <TooltipProvider delayDuration={0}>
-          <div className="fixed top-32 left-1/2 -translate-x-1/2 flex flex-row gap-2 px-2 mb-10 sm:mb-1 justify-center w-full mx-auto lg:left-4 lg:top-[40%] lg:bottom-auto lg:-translate-x-0 lg:-translate-y-1/2 lg:flex-col lg:w-auto lg:overflow-visible z-50">
+          <div className="fixed top-32 left-1/2 -translate-x-1/2 flex flex-row gap-2 px-2 mb-10 sm:mb-1 justify-center w-full mx-auto lg:left-4 lg:top-[40%] lg:bottom-auto lg:-translate-x-0 lg:-translate-y-1/2 lg:flex-col lg:w-auto lg:overflow-visible z-50 lg:mt-24">
             {/* Botón Idiomas */}
             <div className="relative floating-menu">
               <Tooltip>

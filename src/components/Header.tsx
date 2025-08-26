@@ -85,7 +85,10 @@ const Header = () => {
             <button
               key={item.key}
               onClick={() => scrollToSection(item.href)}
-              className="text-blue-950/90 dark:text-white hover:text-sky-400 dark:hover:text-sky-400 transition-colors font-semibold"
+              className={
+                `text-blue-950/90 dark:text-white hover:text-sky-400 dark:hover:text-sky-400 transition-colors font-semibold ` +
+                (item.key === 'about' && (language === 'es' || language === 'pt') ? 'whitespace-nowrap' : '')
+              }
             >
               {item.key === 'nextProjects' ? t('nextProjectsTitle') : t(item.key)}
             </button>
