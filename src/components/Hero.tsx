@@ -194,10 +194,10 @@ const Hero = () => {
                     href="https://wa.me/59892922172"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs lg:w-36 lg:h-16 lg:text-base px-0 lg:px-3 py-0.5"
+                    className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs gap-2 lg:w-36 lg:h-16 lg:text-base px-0 lg:px-3 py-0.5"
                     aria-label="WhatsApp"
                   >
-                    <span className="block lg:hidden"><MessageCircle className="w-5 h-5" /></span>
+                    <MessageCircle className="w-5 h-5" />
                     <span className="hidden lg:inline">WhatsApp</span>
                   </a>
                 </TooltipTrigger>
