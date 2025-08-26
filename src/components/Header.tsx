@@ -101,17 +101,56 @@ const Header = () => {
         </Button>
       </SheetTrigger>
       <SheetContent>
-        <nav className="flex flex-col space-y-4 mt-8">
-          {navItems.map((item) => (
-            <button
-              key={item.key}
-              onClick={() => scrollToSection(item.href)}
-              className="text-left text-foreground/70 hover:text-sky-400 transition-colors py-2"
-            >
-              {item.key === 'nextProjects' ? t('nextProjectsTitle') : t(item.key)}
-            </button>
-          ))}
-        </nav>
+        <div className="flex flex-col space-y-4 mt-8">
+          <div className="flex flex-row items-center gap-4 mb-8 justify-center">
+            {/* Selector de idioma con tooltip */}
+            <TooltipProvider delayDuration={0}>
+              <DropdownMenu>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="icon" className="text-blue-950 dark:text-white flex items-center justify-center hover:text-sky-400" aria-label={t('languages')}>
+                        <Globe className="h-7 w-7" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                  </TooltipTrigger>
+                  <TooltipContent side="bottom">{t('selectLanguage')}</TooltipContent>
+                </Tooltip>
+                <DropdownMenuContent>
+                  {languages.map((lang) => (
+                    <DropdownMenuItem
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code as 'es' | 'pt' | 'en')}
+                      className={language === lang.code ? 'bg-accent' : ''}
+                    >
+                      {lang.name}
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+              {/* Botón modo oscuro/claro con tooltip */}
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="ghost" size="icon" onClick={toggleTheme} className="text-blue-950 dark:text-white flex items-center justify-center hover:text-sky-400" aria-label={theme === 'light' ? t('darkMode') : t('lightMode')}>
+                    {theme === 'light' ? <Moon className="h-7 w-7" /> : <Sun className="h-7 w-7" />}
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent side="bottom">{theme === 'light' ? t('darkMode') : t('lightMode')}</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+          </div>
+          <nav className="flex flex-col space-y-4">
+            {navItems.map((item) => (
+              <button
+                key={item.key}
+                onClick={() => scrollToSection(item.href)}
+                className="text-left text-foreground/70 hover:text-sky-400 transition-colors py-2"
+              >
+                {item.key === 'nextProjects' ? t('nextProjectsTitle') : t(item.key)}
+              </button>
+            ))}
+          </nav>
+        </div>
       </SheetContent>
     </Sheet>
   </div>

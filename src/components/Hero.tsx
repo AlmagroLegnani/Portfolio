@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Download, Mail, Linkedin, Github, Globe, Lightbulb, Folder } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { useLanguage } from '@/contexts/LanguageContext';
 
@@ -39,7 +40,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 via-background to-secondary/20 pt-20 relative mt-16 overflow-hidden">
+  <section className="min-h-screen flex items-center justify-center bg-gradient-to-b from-primary/10 via-background to-secondary/20 pt-20 relative mt-16">
       <div className="container mx-auto px-4 text-center relative">
         {/* ...eliminados círculos decorativos de fondo... */}
         <div className="max-w-5xl mx-auto relative z-10 px-2">
@@ -106,6 +107,8 @@ const Hero = () => {
                 </div>
               )}
             </div>
+            {/* Botón Teléfono */}
+            {/* Botón WhatsApp */}
             {/* Botón Proyectos */}
             <div className="relative floating-menu">
               <Tooltip>
@@ -183,13 +186,31 @@ const Hero = () => {
                 <TooltipContent side="right">GitHub</TooltipContent>
               </Tooltip>
             </div>
+            {/* Botón WhatsApp */}
+            <div className="relative floating-menu">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <a
+                    href="https://wa.me/59892922172"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs lg:w-36 lg:h-16 lg:text-base px-0 lg:px-3 py-0.5"
+                    aria-label="WhatsApp"
+                  >
+                    <span className="block lg:hidden"><MessageCircle className="w-5 h-5" /></span>
+                    <span className="hidden lg:inline">WhatsApp</span>
+                  </a>
+                </TooltipTrigger>
+                <TooltipContent side="right">WhatsApp</TooltipContent>
+              </Tooltip>
+            </div>
           </div>
           </TooltipProvider>
           <div className="mb-8 mt-16 sm:mt-0 md:mt-16 lg:mt-4">
             <img
               src="/img/cv_photo.png"
               alt="Foto de perfil de Leandro Almagro Legnani"
-                className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto mb-8 mt-16 sm:mt-0 md:mt-16 lg:mt-4 rounded-full object-cover border-4 border-blue-950 dark:border-white shadow-2xl ring-4 ring-accent/40 hover:scale-105 transition-transform duration-300"
+              className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 mx-auto mb-8 mt-16 rounded-full object-cover border-4 border-blue-950 dark:border-white shadow-2xl ring-4 ring-accent/40 hover:scale-105 transition-transform duration-300"
             />
           </div>
           <h1 className="text-2xl sm:text-4xl md:text-6xl font-extrabold mb-6 text-blue-950 dark:text-white drop-shadow-lg whitespace-pre-line text-balance">
@@ -201,39 +222,29 @@ const Hero = () => {
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
             {t('profileDescription')}
           </p>
-          {/* Botón Contáctame solo en mobile, debajo del texto y arriba de los botones de CV */}
-          <div className="flex sm:hidden justify-center mb-4 w-full">
-            <button
-              onClick={scrollToContact}
-              className="w-full max-w-xs bg-sky-400 text-white text-base font-bold py-2 rounded-full shadow-md hover:bg-sky-500 transition-colors flex items-center justify-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              {t('contactMe') || 'Contáctame'}
-            </button>
-          </div>
-          {/* Botón Contáctame en desktop, arriba de los botones de CV */}
-          <div className="hidden sm:flex flex-col gap-4 justify-center items-center mb-8">
-            <button
-              onClick={scrollToContact}
-              className="bg-sky-400 text-white text-lg font-bold py-2 px-6 rounded-full shadow-md hover:bg-sky-500 transition-colors flex items-center justify-center gap-2"
-            >
-              <Mail className="w-5 h-5" />
-              {t('contactMe') || 'Contáctame'}
-            </button>
-            <div className="flex flex-row gap-4 justify-center items-center w-full">
-              <a href="/AlmagroLegnani_CV.pdf" download target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="gap-2 bg-blue-950 text-white hover:bg-blue-900 dark:bg-white dark:text-blue-950 dark:hover:bg-blue-200">
+          {/* Botones de descarga siempre visibles, prolijos arriba del botón Contáctame */}
+          <div className="flex flex-col gap-4 justify-center items-center mb-8 w-full">
+            <div className="flex flex-row gap-4 justify-center items-center w-full mb-2">
+              <a href="/cv/Leandro_Almagro_CV.pdf" download target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="gap-2 bg-blue-950 text-white hover:bg-blue-900 dark:bg-white dark:text-blue-950 dark:hover:bg-blue-200 w-full max-w-xs sm:max-w-none">
                   <Download className="w-5 h-5" />
                   {t('downloadCV')}
                 </Button>
               </a>
               <a href="/Escolaridad_AlmagroLegnani.pdf" download target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="gap-2">
+                <Button size="lg" variant="outline" className="gap-2 w-full max-w-xs sm:max-w-none">
                   <Download className="w-5 h-5" />
                   {t('escolaridad')}
                 </Button>
               </a>
             </div>
+            <button
+              onClick={scrollToContact}
+              className="w-full max-w-xs sm:max-w-none bg-sky-400 text-white text-base sm:text-lg font-bold py-2 px-6 rounded-full shadow-md hover:bg-sky-500 transition-colors flex items-center justify-center gap-2"
+            >
+              <Mail className="w-5 h-5" />
+              {t('contactMe') || 'Contáctame'}
+            </button>
           </div>
         </div>
       </div>
