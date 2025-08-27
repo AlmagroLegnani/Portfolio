@@ -240,7 +240,7 @@ const Hero = () => {
             </div>
             <button
               onClick={scrollToContact}
-              className="w-full max-w-xs sm:max-w-none bg-sky-400 text-white text-base sm:text-lg font-bold py-2 px-6 rounded-full shadow-md hover:bg-sky-500 transition-colors flex items-center justify-center gap-2"
+              className="w-full max-w-[190px] sm:max-w-xs lg:max-w-xs bg-sky-400 text-white text-base sm:text-lg font-bold py-2 px-6 rounded-full shadow-md hover:bg-sky-500 transition-colors flex items-center justify-center gap-2"
             >
               <Mail className="w-5 h-5" />
               {t('contactMe') || 'Contáctame'}
