@@ -1,10 +1,38 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Calendar, MapPin } from 'lucide-react';
+import { Calendar, MapPin, Globe, Lightbulb, Folder, Linkedin, Github, MessageCircle } from 'lucide-react';
+import { TooltipProvider, Tooltip, TooltipTrigger, TooltipContent } from '@/components/ui/tooltip';
 import { useLanguage } from '@/contexts/LanguageContext';
+import React, { useState } from 'react';
 
 const Experience = () => {
   const { t, language } = useLanguage();
+  const [showLanguages, setShowLanguages] = useState(false);
+  const [showSkills, setShowSkills] = useState(false);
+  const [showProjects, setShowProjects] = useState(false);
+  const [showLinkedin, setShowLinkedin] = useState(false);
+  const [showGithub, setShowGithub] = useState(false);
+  const [showWhatsapp, setShowWhatsapp] = useState(false);
+
+  // Cerrar menús al hacer click fuera o al abrir otro
+  React.useEffect(() => {
+    const handleClick = (e) => {
+      const target = e.target;
+      if (target.closest('.floating-menu')) return;
+      setShowLanguages(false);
+      setShowSkills(false);
+      setShowProjects(false);
+      setShowLinkedin(false);
+      setShowGithub(false);
+      setShowWhatsapp(false);
+    };
+    if (showLanguages || showSkills || showProjects || showLinkedin || showGithub || showWhatsapp) {
+      document.addEventListener('mousedown', handleClick);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, [showLanguages, showSkills, showProjects, showLinkedin, showGithub, showWhatsapp]);
 
   // Usar la lista internacionalizada desde el contexto
   // Ordenar por fecha de inicio (más reciente primero)
@@ -107,12 +135,226 @@ const Experience = () => {
 
   return (
     <>
+
       <section id="experience" className="py-20 bg-secondary/5">
         <div className="container mx-auto px-4 flex flex-col items-center justify-center">
           <div className="max-w-6xl mx-auto w-full flex flex-col items-center justify-center">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 w-full text-blue-950 dark:text-white">
               {t('experienceTitle')}
             </h2>
+            {/* Floating Action Buttons (icon-only, con menús desplegables) */}
+            <div className="fixed top-32 left-1/2 -translate-x-1/2 flex flex-row gap-2 px-2 mb-10 sm:mb-1 justify-center w-full mx-auto lg:left-4 lg:top-[40%] lg:bottom-auto lg:-translate-x-0 lg:-translate-y-1/2 lg:flex-col lg:w-auto lg:overflow-visible z-50 lg:mt-24">
+              <TooltipProvider delayDuration={0}>
+                {/* Idiomas */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => setShowLanguages((v) => !v)}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs px-0 py-0.5"
+                        aria-label={t('languages')}
+                        type="button"
+                      >
+                        <Globe className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">{t('languages')}</TooltipContent>
+                  </Tooltip>
+                  {showLanguages && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border rounded-lg shadow-lg p-4 min-w-[180px] text-left z-50">
+                      <div className="font-semibold mb-2">{t('languages')}</div>
+                      <ul className="space-y-1 text-sm">
+                        {Array.isArray(t('languagesList')) && t('languagesList').map((lang: string, i: number) => (
+                          <li key={i}>{lang}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                {/* Aptitudes */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setShowSkills((v) => !v);
+                          setShowLanguages(false);
+                          setShowProjects(false);
+                          setShowLinkedin(false);
+                          setShowGithub(false);
+                          setShowWhatsapp(false);
+                        }}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs px-0 py-0.5"
+                        aria-label={t('aptitudesTitle')}
+                        type="button"
+                      >
+                        <Lightbulb className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">{t('aptitudesTitle')}</TooltipContent>
+                  </Tooltip>
+                  {showSkills && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border rounded-lg shadow-lg p-4 min-w-[200px] text-left z-50">
+                      <div className="font-semibold mb-2 tracking-wide">{t('aptitudesTitle')}</div>
+                      <ul className="space-y-1 text-sm text-left">
+                        {Array.isArray(t('aptitudesList')) && t('aptitudesList').map((apt: string, i: number) => (
+                          <li key={i}>• {apt}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                {/* Proyectos */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setShowProjects((v) => !v);
+                          setShowLanguages(false);
+                          setShowSkills(false);
+                          setShowLinkedin(false);
+                          setShowGithub(false);
+                          setShowWhatsapp(false);
+                        }}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs px-0 py-0.5"
+                        aria-label={t('projects')}
+                        type="button"
+                      >
+                        <Folder className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">{t('projects')}</TooltipContent>
+                  </Tooltip>
+                  {showProjects && (
+                    <div className="absolute left-0 top-full mt-2 w-40 bg-background border rounded-lg shadow-lg z-50 flex flex-col">
+                      <a
+                        href="https://nacho-diez-mma.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 text-sm text-foreground hover:bg-primary/10 rounded-t-lg transition-colors"
+                      >
+                        {t('nachoMmaDiez')}
+                      </a>
+                      <a
+                        href="https://tapizados-full.vercel.app/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-2 text-sm text-foreground hover:bg-primary/10 rounded-b-lg transition-colors"
+                      >
+                        {t('tapizadosFull')}
+                      </a>
+                    </div>
+                  )}
+                </div>
+                {/* LinkedIn */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setShowLinkedin((v) => !v);
+                          setShowLanguages(false);
+                          setShowSkills(false);
+                          setShowProjects(false);
+                          setShowGithub(false);
+                          setShowWhatsapp(false);
+                        }}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs gap-2 px-0 py-0.5"
+                        aria-label="LinkedIn"
+                        type="button"
+                      >
+                        <Linkedin className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">LinkedIn</TooltipContent>
+                  </Tooltip>
+                  {showLinkedin && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border rounded-lg shadow-lg p-4 min-w-[180px] text-left z-50">
+                      <a
+                        href="https://www.linkedin.com/in/leandroalmagrolegnani/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-900 hover:underline block"
+                      >
+                        {t('linkedin')}
+                      </a>
+                    </div>
+                  )}
+                </div>
+                {/* GitHub */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setShowGithub((v) => !v);
+                          setShowLanguages(false);
+                          setShowSkills(false);
+                          setShowProjects(false);
+                          setShowLinkedin(false);
+                          setShowWhatsapp(false);
+                        }}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs gap-2 px-0 py-0.5"
+                        aria-label="GitHub"
+                        type="button"
+                      >
+                        <Github className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">GitHub</TooltipContent>
+                  </Tooltip>
+                  {showGithub && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border rounded-lg shadow-lg p-4 min-w-[180px] text-left z-50">
+                      <a
+                        href="https://github.com/AlmagroLegnani"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-900 hover:underline block"
+                      >
+                        {t('github')}
+                      </a>
+                    </div>
+                  )}
+                </div>
+                {/* WhatsApp */}
+                <div className="relative floating-menu">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <button
+                        onClick={() => {
+                          setShowWhatsapp((v) => !v);
+                          setShowLanguages(false);
+                          setShowSkills(false);
+                          setShowProjects(false);
+                          setShowLinkedin(false);
+                          setShowGithub(false);
+                        }}
+                        className="bg-blue-950 text-white rounded-full shadow-md hover:bg-sky-400 hover:text-white dark:bg-white dark:text-blue-950 dark:hover:bg-sky-400/80 transition-colors font-semibold flex items-center justify-center w-12 h-12 text-xs gap-2 px-0 py-0.5"
+                        aria-label="WhatsApp"
+                        type="button"
+                      >
+                        <MessageCircle className="w-5 h-5" />
+                      </button>
+                    </TooltipTrigger>
+                    <TooltipContent side="right">WhatsApp</TooltipContent>
+                  </Tooltip>
+                  {showWhatsapp && (
+                    <div className="absolute left-0 top-full mt-2 bg-background border rounded-lg shadow-lg p-4 min-w-[180px] text-left z-50">
+                      <a
+                        href="https://wa.me/59892922172"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-green-700 hover:underline block"
+                      >
+                        WhatsApp
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </TooltipProvider>
+            </div>
+            {/* Timeline and cards */}
             <div className="relative w-full flex flex-col items-center justify-center">
               {/* Timeline line */}
               <div className="absolute left-1/2 -translate-x-1/2 w-0.5 h-full bg-neutral-300 dark:bg-border"></div>
@@ -122,9 +364,9 @@ const Experience = () => {
                     {/* Timeline dot */}
                     <div className="hidden md:block absolute left-3 md:left-1/2 transform md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full border-4 border-background z-10"></div>
                     {/* Content */}
-                    <div className={`ml-0 md:ml-0 w-full md:w-5/12 flex flex-col items-center ${index % 2 === 0 ? 'md:mr-auto md:pr-8' : 'md:ml-auto md:pl-8'}`}> 
+                    <div className={`w-full md:w-5/12 flex flex-col items-center ${index % 2 === 0 ? 'md:mr-auto md:pr-0' : 'md:ml-auto md:pl-0'}`}> 
                       <Card className="hover:shadow-md transition-shadow text-blue-900 bg-gradient-to-br from-primary to-blue-900 dark:bg-white dark:text-blue-900 dark:bg-none dark:border dark:border-blue-900/10 w-full flex flex-col items-center">
-                        <CardHeader className="w-full flex flex-col items-center">
+                        <CardHeader className="w-full flex flex-col items-center p-4">
                           <div className="flex flex-col items-center w-full">
                             <CardTitle className="text-lg font-bold text-blue-100 dark:text-blue-900 text-center w-full">{exp.title[language]}</CardTitle>
                             <div className="flex items-center gap-2 text-sm text-blue-100 dark:text-blue-900 justify-center w-full mt-2">
@@ -137,7 +379,7 @@ const Experience = () => {
                             {exp.company} - {exp.location[language]}
                           </div>
                         </CardHeader>
-                        <CardContent className="w-full flex flex-col items-center">
+                        <CardContent className="w-full flex flex-col items-center p-4 pt-0">
                           <p className="text-blue-100 dark:text-blue-900 mb-4 text-sm leading-relaxed text-center w-full">
                             {exp.description[language]}
                           </p>
@@ -172,15 +414,15 @@ const Experience = () => {
               <div className="space-y-16 relative z-10">
                 {/* E-commerce de libros (izquierda, barra de progreso a la derecha cruzando la línea) */}
                 <div className="flex flex-col md:flex-row items-center md:items-stretch w-full">
-                  <div className="relative md:w-1/2 md:pr-12 w-full flex flex-col items-center justify-center">
+                  <div className="relative md:w-1/2 md:pr-2 w-full flex flex-col items-center justify-center">
                     <Card className="bg-gradient-to-br from-primary to-blue-900 text-blue-900 dark:bg-white dark:text-blue-900 dark:bg-none dark:border dark:border-blue-900/10 w-full flex flex-col items-center justify-center">
-                      <CardHeader className="w-full flex flex-col items-center justify-center">
+                      <CardHeader className="w-full flex flex-col items-center justify-center p-4">
                         <div className="flex flex-col gap-1 items-center w-full justify-center">
                           <CardTitle className="text-lg font-bold text-blue-100 dark:text-blue-900 text-center w-full">{nextProjects[0].title}</CardTitle>
                           <span className="text-xs font-semibold text-blue-100 dark:text-blue-900 flex items-center gap-1 justify-center w-full"><MapPin className="w-3 h-3 inline-block mr-1" />{nextProjects[0].company} - {nextProjects[0].location}</span>
                         </div>
                       </CardHeader>
-                      <CardContent className="w-full flex flex-col items-center justify-center">
+                      <CardContent className="w-full flex flex-col items-center justify-center p-4 pt-0">
                         <p className="mb-2 text-center w-full text-blue-100 dark:text-blue-900">{nextProjects[0].description}</p>
                         <div className="flex flex-wrap gap-1 mb-2 justify-center w-full">
                           {(Array.isArray(nextProjects[0].technologies) ? nextProjects[0].technologies : [nextProjects[0].technologies]).map((tech: string) => (
@@ -207,15 +449,15 @@ const Experience = () => {
                     </div>
                     <div className="text-xs mt-1 text-green-700 font-semibold">{nextProjects[1].status}</div>
                   </div>
-                  <div className="relative md:w-1/2 md:pl-12 w-full flex flex-col items-center justify-center">
+                  <div className="relative md:w-1/2 md:pl-2 w-full flex flex-col items-center justify-center">
                     <Card className="bg-gradient-to-br from-primary to-blue-900 text-blue-900 dark:bg-white dark:text-blue-900 dark:bg-none dark:border dark:border-blue-900/10 w-full flex flex-col items-center justify-center">
-                      <CardHeader className="w-full flex flex-col items-center justify-center">
+                      <CardHeader className="w-full flex flex-col items-center justify-center p-4">
                         <div className="flex flex-col gap-1 items-center w-full justify-center">
                           <CardTitle className="text-lg font-bold text-blue-100 dark:text-blue-900 text-center w-full">{nextProjects[1].title}</CardTitle>
                           <span className="text-xs font-semibold text-blue-100 dark:text-blue-900 flex items-center gap-1 justify-center w-full"><MapPin className="w-3 h-3 inline-block mr-1" />{nextProjects[1].company} - {nextProjects[1].location}</span>
                         </div>
                       </CardHeader>
-                      <CardContent className="w-full flex flex-col items-center justify-center">
+                      <CardContent className="w-full flex flex-col items-center justify-center p-4 pt-0">
                         <p className="mb-2 text-center w-full text-blue-100 dark:text-blue-900">{nextProjects[1].description}</p>
                         <div className="flex flex-wrap gap-1 mb-2 justify-center w-full">
                           {(Array.isArray(nextProjects[1].technologies) ? nextProjects[1].technologies : [nextProjects[1].technologies]).map((tech: string) => (
