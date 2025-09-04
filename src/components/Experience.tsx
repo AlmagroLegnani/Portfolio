@@ -78,10 +78,15 @@ const Experience = () => {
         es: 'Desarrollo de aplicación móvil',
         en: 'Mobile App Development'
       },
-      company: 'Proyecto académico',
+      company: {
+        es: 'Proyecto académico',
+        en: 'Academic Project',
+        pt: 'Projeto acadêmico'
+      },
       location: {
         es: 'Montevideo',
-        en: 'Montevideo'
+        en: 'Montevideo',
+        pt: 'Montevidéu'
       },
       period: '02/2025 - 02/2025',
       description: {
@@ -96,10 +101,15 @@ const Experience = () => {
         es: 'Desarrollador de aplicaciones web',
         en: 'Web Application Developer'
       },
-      company: 'Proyecto académico',
+      company: {
+        es: 'Proyecto académico',
+        en: 'Academic Project',
+        pt: 'Projeto acadêmico'
+      },
       location: {
         es: 'Montevideo',
-        en: 'Montevideo'
+        en: 'Montevideo',
+        pt: 'Montevidéu'
       },
       period: '08/2024 - 11/2024',
       description: {
@@ -374,10 +384,10 @@ const Experience = () => {
                               {exp.period}
                             </div>
                           </div>
-                          <div className="flex items-center gap-2 text-sm text-blue-100 dark:text-blue-900 mt-1 justify-center w-full">
-                            <MapPin className="w-4 h-4 text-blue-100 dark:text-blue-900" />
-                            {exp.company} - {exp.location[language]}
-                          </div>
+                            <div className="flex items-center gap-2 text-sm text-blue-100 dark:text-blue-900 mt-1 justify-center w-full">
+                              <MapPin className="w-4 h-4 text-blue-100 dark:text-blue-900" />
+                              {typeof exp.company === 'string' ? exp.company : exp.company[language]} - {typeof exp.location === 'string' ? exp.location : exp.location[language]}
+                            </div>
                         </CardHeader>
                         <CardContent className="w-full flex flex-col items-center p-4 pt-0">
                           <p className="text-blue-100 dark:text-blue-900 mb-4 text-sm leading-relaxed text-center w-full">

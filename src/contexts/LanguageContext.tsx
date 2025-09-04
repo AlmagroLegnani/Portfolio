@@ -92,12 +92,12 @@ const translations = {
         technologies: ['HTML', 'CSS', 'JavaScript', 'Vercel']
       },
       {
-        title: 'Desarrollo de aplicación móvil',
-        period: '02/2025 - 02/2025',
-        company: 'Proyecto académico',
-        location: 'Montevideo',
-        description: 'Aplicación móvil con Ionic – Full Stack. Desarrollo de una app móvil utilizando JavaScript conectada a una API REST, con interfaz en HTML mediante Ionic y generación de APK para Android.',
-        technologies: ['JavaScript', 'Ionic', 'HTML', 'API REST', 'Android']
+  title: 'Desarrollo de aplicación móvil',
+  period: '02/2025 - 02/2025',
+  company: 'Proyecto académico',
+  location: 'Montevideo',
+  description: 'Aplicación móvil con Ionic – Full Stack. Desarrollo de una app móvil utilizando JavaScript conectada a una API REST, con interfaz en HTML mediante Ionic y generación de APK para Android.',
+  technologies: ['JavaScript', 'Ionic', 'HTML', 'API REST', 'Android']
       },
       {
         title: 'Desarrollador de aplicaciones web',
