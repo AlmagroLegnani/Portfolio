@@ -70,7 +70,7 @@ const Hero = () => {
                   {t('downloadCV')}
                 </Button>
               </a>
-              <a href="/Escolaridad_AlmagroLegnani.pdf" download target="_blank" rel="noopener noreferrer">
+              <a href="/cv/Escolaridad.pdf" download target="_blank" rel="noopener noreferrer">
                 <Button size="lg" variant="outline" className="gap-2 w-full max-w-xs sm:max-w-none">
                   <Download className="w-5 h-5" />
                   {t('escolaridad')}

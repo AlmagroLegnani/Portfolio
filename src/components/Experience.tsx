@@ -384,10 +384,10 @@ const Experience = () => {
                               {exp.period}
                             </div>
                           </div>
-                            <div className="flex items-center gap-2 text-sm text-blue-100 dark:text-blue-900 mt-1 justify-center w-full">
-                              <MapPin className="w-4 h-4 text-blue-100 dark:text-blue-900" />
-                              {typeof exp.company === 'string' ? exp.company : exp.company[language]} - {typeof exp.location === 'string' ? exp.location : exp.location[language]}
-                            </div>
+                          <div className="flex items-center gap-2 text-sm text-blue-100 dark:text-blue-900 mt-1 justify-center w-full">
+                            <MapPin className="w-4 h-4 text-blue-100 dark:text-blue-900" />
+                            {typeof exp.company === 'string' ? exp.company : exp.company[language]} - {typeof exp.location === 'string' ? exp.location : exp.location[language]}
+                          </div>
                         </CardHeader>
                         <CardContent className="w-full flex flex-col items-center p-4 pt-0">
                           <p className="text-blue-100 dark:text-blue-900 mb-4 text-sm leading-relaxed text-center w-full">
@@ -405,6 +405,8 @@ const Experience = () => {
                     </div>
                   </div>
                 ))}
+                {/* Más separación para próximos lanzamientos */}
+                <div className="mt-16" />
               </div>
             </div>
           </div>
@@ -424,7 +426,7 @@ const Experience = () => {
               <div className="space-y-16 relative z-10">
                 {/* E-commerce de libros (izquierda, barra de progreso a la derecha cruzando la línea) */}
                 <div className="flex flex-col md:flex-row items-center md:items-stretch w-full">
-                  <div className="relative md:w-1/2 md:pr-2 w-full flex flex-col items-center justify-center">
+              <div className="relative md:w-1/2 md:pr-2 md:mr-20 w-full flex flex-col items-center justify-center">
                     <Card className="bg-gradient-to-br from-primary to-blue-900 text-blue-900 dark:bg-white dark:text-blue-900 dark:bg-none dark:border dark:border-blue-900/10 w-full flex flex-col items-center justify-center">
                       <CardHeader className="w-full flex flex-col items-center justify-center p-4">
                         <div className="flex flex-col gap-1 items-center w-full justify-center">
@@ -459,7 +461,7 @@ const Experience = () => {
                     </div>
                     <div className="text-xs mt-1 text-green-700 font-semibold">{nextProjects[1].status}</div>
                   </div>
-                  <div className="relative md:w-1/2 md:pl-2 w-full flex flex-col items-center justify-center">
+              <div className="relative md:w-1/2 md:pl-2 md:ml-20 w-full flex flex-col items-center justify-center">
                     <Card className="bg-gradient-to-br from-primary to-blue-900 text-blue-900 dark:bg-white dark:text-blue-900 dark:bg-none dark:border dark:border-blue-900/10 w-full flex flex-col items-center justify-center">
                       <CardHeader className="w-full flex flex-col items-center justify-center p-4">
                         <div className="flex flex-col gap-1 items-center w-full justify-center">

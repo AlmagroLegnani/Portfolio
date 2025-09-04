@@ -89,41 +89,55 @@ const Projects = () => {
   ];
 
   return (
-    <section id="projects" className="py-20">
-      <div className="container mx-auto px-4 flex flex-col items-center justify-center">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-8 w-full">{t('projectsTitle')}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-          {projects.map((project, idx) => (
-            <Card key={idx} className="flex flex-col h-full items-center w-full">
-              <CardHeader className="w-full flex flex-col items-center">
-                <CardTitle className="text-center w-full">{project.title}</CardTitle>
-                <div className="flex flex-wrap gap-2 mt-2 justify-center w-full">
-                  {project.technologies.map((tech, i) => (
-                    <Badge key={i} variant="secondary">{tech}</Badge>
-                  ))}
-                </div>
-              </CardHeader>
-              <CardContent className="flex flex-col flex-1 justify-between items-center w-full">
-                <p className="mb-4 text-center w-full">{project.description[language]}</p>
-                <div className="flex flex-col sm:flex-row items-center justify-between mt-auto w-full gap-2">
-                  <div className="flex gap-2 justify-center w-full">
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver online" className="hover:text-sky-400 transition-colors">
-                      <ExternalLink className="w-5 h-5" />
-                    </a>
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-sky-400 transition-colors">
-                      <Github className="w-5 h-5" />
-                    </a>
-                  </div>
-                  <span className="text-xs text-muted-foreground flex items-center gap-1 justify-center w-full">
-                    <Calendar className="w-4 h-4" /> {project.date}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+    <>
+      <div className="h-32 md:h-40 lg:h-48" />
+      <section id="projects" className="py-20 relative">
+        {/* Línea de tiempo vertical */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-purple-600 hidden md:block"></div>
+        
+        <div className="container mx-auto px-4 flex flex-col items-center justify-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 w-full">{t('projectsTitle')}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 w-full">
+            {projects.map((project, idx) => (
+              <div 
+                key={idx} 
+                className={`relative ${idx % 2 === 0 ? 'md:mt-16' : 'md:-mt-16'} md:ml-32 lg:ml-40 xl:ml-56`}
+              >
+                {/* Punto en la línea de tiempo */}
+                <div className="absolute -left-8 top-1/2 transform -translate-y-1/2 w-6 h-6 rounded-full bg-blue-500 border-4 border-white shadow-lg hidden md:block"></div>
+                
+                <Card className="flex flex-col h-full items-center w-full transform transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                  <CardHeader className="w-full flex flex-col items-center">
+                    <CardTitle className="text-center w-full">{project.title}</CardTitle>
+                    <div className="flex flex-wrap gap-2 mt-2 justify-center w-full">
+                      {project.technologies.map((tech, i) => (
+                        <Badge key={i} variant="secondary">{tech}</Badge>
+                      ))}
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex flex-col flex-1 justify-between items-center w-full">
+                    <p className="mb-4 text-center w-full">{project.description[language]}</p>
+                    <div className="flex flex-col sm:flex-row items-center justify-between mt-auto w-full gap-2">
+                      <div className="flex gap-2 justify-center w-full">
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Ver online" className="hover:text-sky-400 transition-colors">
+                          <ExternalLink className="w-5 h-5" />
+                        </a>
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-sky-400 transition-colors">
+                          <Github className="w-5 h-5" />
+                        </a>
+                      </div>
+                      <span className="text-xs text-muted-foreground flex items-center gap-1 justify-center w-full">
+                        <Calendar className="w-4 h-4" /> {project.date}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
